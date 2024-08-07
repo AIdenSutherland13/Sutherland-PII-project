@@ -14,14 +14,7 @@ editor:
     wrap: sentence
 ---
 
-The structure below is one possible setup for a data analysis project (including the course project).
-For a manuscript, adjust as needed.
-You don't need to have exactly these sections, but the content covering those sections should be addressed.
 
-This uses MS Word as output format.
-[See here](https://quarto.org/docs/output-formats/ms-word.html) for more information.
-You can switch to other formats, like html or pdf.
-See [the Quarto documentation](https://quarto.org/) for other formats.
 
 ```{r, echo=FALSE, message=FALSE}
 # load a few R packages
@@ -30,8 +23,14 @@ library(knitr)
 ```
 
 
-# Summary/Abstract *Write a summary of your project.*
+# Summary/Abstract 
+In this project, I explored factors influencing the user scores of video games and attempted to predict these scores using various predictors. The data were collected from multiple sources, including a TidyTuesday dataset, a Kaggle dataset, and a manually curated dataset. I focused on the top 25 games based on user scores, owners, and playtime metrics, resulting in a final dataset of 56 observations with 13 variables.
 
+I aimed to determine the predictors of a game's user score and whether these scores could be accurately predicted. My analysis included data cleaning, merging, and exploratory data analysis (EDA) to understand the relationships between variables. I then applied linear regression and Random Forest models to predict user scores, with a cross-validated Random Forest model showing the best performance.
+
+The Random Forest model, after 10-fold cross-validation, achieved an RMSE of 0.3968 and an MAE of 0.2896, indicating effective prediction of user scores based on the included predictors. The results suggest a promising approach for predicting game user scores and provide insights into the factors contributing to higher scores.
+
+Despite limitations such as a small dataset and potential predictor biases, the project highlights the potential of machine learning in understanding and predicting user preferences in video games. Future work could expand the dataset and explore additional predictors to enhance the model's accuracy and applicability.
 
 
 
@@ -60,7 +59,7 @@ There was a project that was done with similar data that can be found clicking [
 
 # Methods
 
-*Describe your methods. That should describe the data, the cleaning processes, and the analysis approaches. You might want to provide a shorter description here and all the details in the supplement.* I found 2 different data sets that contained different kinds of sentiment about certain video game titles, 1 by metascore, and one by userscore.
+I found 2 different data sets that contained different kinds of sentiment about certain video game titles, 1 by metascore, and one by userscore.
 I then combined them, found the top 25 games for userscore, amount of owners, median playtime, and average playtime then put them in the final dataset.
 Overall there were 56 obs with 13 variables.
 I later added another column with the game class (with 2 factors, one being "AAA" and the other being "indie")
@@ -80,8 +79,6 @@ I then joined my class_game.csv to the top 25 games and used that as the final d
 
 ## Statistical analysis
 
-*Explain anything related to your statistical analyses.*
-
 For the statistical analysis, I split the cleaned_games.RData into training and test datasets, then trained and fit a random forest and linear regression model.
 
 {{< pagebreak >}}
@@ -90,7 +87,6 @@ For the statistical analysis, I split the cleaned_games.RData into training and 
 
 ## Exploratory/Descriptive analysis
 
-*Use a combination of text/tables/figures to explore and describe your data. Show the most important descriptive results here. Additional ones should go in the supplement. Even more can be in the R and Quarto files that are part of your project.*
 
 @fig-result shows a boxplot comparing game userscore by different game development classes.
 There seems to be a slight trend leaning towards AAA games having a higher userscore.
@@ -152,8 +148,6 @@ kable(significant_coeff_df, digits = 4, caption = "Statistically Significant Coe
 ```
 
 ## Full analysis
-
-*Use one or several suitable statistical/machine learning methods to analyze your data and to produce meaningful figures, tables, etc. This might again be code that is best placed in one or several separate R scripts that need to be well documented. You want the code to produce figures and data ready for display as tables, and save those. Then you load them here.*
 
 ```{r}
 load("~/GitHub/Sutherland-PII-project/code/analysis-code/rf_metrics.RData")
@@ -226,13 +220,13 @@ These results suggest that the Random Forest approach effectively captures the r
 ## Strengths and Limitations
 
 One extreme limitation to this project was the fact that I only had the top 25 game classes. Provided I had the time (between classes and work) to match all of the games mentioned with its respective class I feel that the models would fit a lot better. One strength I could always rely on was how detailed the data could get. Depending on how you clean/wrangle it you could use the data for a multitude of projects that involve different hypothesis. Again, i belive having more data to go through in this project could conclude more concrete models for prediction.
-*Discuss what you perceive as strengths and limitations of your analysis.*
+
 
 ## Conclusions
 
-*What are the main take-home messages?*
+
 Given the r-squared value of the cross validated Random Forest Model, we can conclude that we can roughly conclude the userscore from the 11 predictor variables in the games.csv file. Some of the predictors (like owners and metascore) would need to be predicted if you were to want to predict the userscore of an unreleased game. Overall this project was really fun due to it pertaining to a topic I find truly fascinating being a video game consumer myself. In the future I would probably look for another scoring metrics besides metascore and userscore in order to broaden consumer sentiment.
-*Include citations in your Rmd file using bibtex, the list of references will automatically be placed at the end*
+
 
 
 {{< pagebreak >}}
